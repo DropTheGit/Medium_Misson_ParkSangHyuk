@@ -1,6 +1,6 @@
 package com.ll.medium.domain.member.controller;
 
-import com.ll.medium.domain.member.entity.MemberCreateForm;
+import com.ll.medium.domain.member.MemberCreateForm;
 import com.ll.medium.domain.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +34,10 @@ public class MemberController {
         this.memberService.join(memberCreateForm.getUsername(), memberCreateForm.getPassword1());
 
         return "redirect:/";
+    }
+
+    @GetMapping("/member/login")
+    public String login() {
+        return "login_form";
     }
 }
