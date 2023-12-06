@@ -1,14 +1,16 @@
 package com.ll.medium.domain.article.controller;
 
 import com.ll.medium.domain.article.entity.Article;
+import com.ll.medium.domain.article.entity.ArticleForm;
 import com.ll.medium.domain.article.service.ArticleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +22,17 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping("/post/write")
-    public String write(){
+    public String write(ArticleForm articleForm){
         return "article_write";
     }
 
     @PostMapping("/post/write")
-    public String write(@RequestParam String title, @RequestParam String body,
-                        @RequestParam boolean isPublished){
-        this.articleService.write(title, body, isPublished);
+    public String write(@Valid ArticleForm articleForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "article_write";
+        }
+        this.articleService.write(articleForm.getTitle(), articleForm.getBody(),
+                articleForm.isPublished());
         return "redirect:/post/list";
     }
 
