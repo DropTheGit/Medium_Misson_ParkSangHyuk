@@ -6,6 +6,7 @@ import com.ll.medium.global.Exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class ArticleService {
         article.setTitle(title);
         article.setBody(body);
         article.setPublished(isPublished);
+        article.setCreateDate(LocalDateTime.now());
         this.articleRepository.save(article);
     }
 
