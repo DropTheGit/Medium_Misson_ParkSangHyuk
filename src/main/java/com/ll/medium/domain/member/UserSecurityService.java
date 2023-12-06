@@ -21,6 +21,7 @@ public class UserSecurityService implements UserDetailsService {
 
     private final MemberRepository MemberRepository;
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> _member = this.MemberRepository.findByusername(username);
         if(_member.isEmpty()){

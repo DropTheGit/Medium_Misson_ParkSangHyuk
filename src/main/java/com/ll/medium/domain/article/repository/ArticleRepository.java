@@ -1,4 +1,7 @@
 package com.ll.medium.domain.article.repository;
 
-public class ArticleRepository {
+import com.ll.medium.domain.article.entity.Article;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 }
