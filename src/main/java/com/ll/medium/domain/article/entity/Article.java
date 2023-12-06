@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -19,5 +21,8 @@ public class Article {
 
     private String body;
 
+    private LocalDateTime createDate;
+
     private boolean isPublished;
+
 }

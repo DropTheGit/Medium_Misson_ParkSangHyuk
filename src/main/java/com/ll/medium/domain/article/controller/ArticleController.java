@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,7 +16,8 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class ArticleController {
-    private ArticleService articleService;
+
+    private final ArticleService articleService;
 
     @GetMapping("/post/write")
     public String write(){
@@ -35,5 +37,12 @@ public class ArticleController {
         articleList = this.articleService.getList();
         model.addAttribute("articleList", articleList);
         return "article_list";
+    }
+
+    @GetMapping("post/{id}")
+    public String showDetail(Model model, @PathVariable("id") Long id){
+        Article article = this.articleService.getArticle(id);
+        model.addAttribute("article", article);
+        return "article_detail";
     }
 }
