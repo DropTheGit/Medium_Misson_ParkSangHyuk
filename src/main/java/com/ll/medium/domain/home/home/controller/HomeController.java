@@ -17,7 +17,7 @@ public class HomeController {
     public String showHome(Model model){
         Page<Article> paging = this.articleService.getHomeList(1);
         model.addAttribute("paging", paging);
-        return "home_list";
+        return "domain/home/home_list";
     }
 
 }
