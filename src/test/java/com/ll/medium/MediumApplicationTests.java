@@ -16,19 +16,15 @@ public class MediumApplicationTests {
 
     @Test
     void testJpa(){
-        Article a1 = new Article();
-        a1.setTitle("제목1");
-        a1.setBody("내용1");
-        a1.setPublished(true);
-        a1.setCreateDate(LocalDateTime.now());
-        this.articleRepository.save(a1);
+        for(int i = 0; i < 100 ; i++){
+            Article article = new Article();
+            article.setTitle(String.format("테스트제목%d", i));
+            article.setBody(String.format("테스트내용%d", i));
+            article.setCreateDate(LocalDateTime.now());
+            article.setPublished(true);
+            this.articleRepository.save(article);
+        }
 
-        Article a2 = new Article();
-        a2.setTitle("제목2");
-        a2.setBody("내용2");
-        a2.setPublished(true);
-        a2.setCreateDate(LocalDateTime.now());
-        this.articleRepository.save(a2);
     }
 
 }

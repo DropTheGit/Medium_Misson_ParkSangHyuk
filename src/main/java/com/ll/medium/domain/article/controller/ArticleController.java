@@ -5,15 +5,14 @@ import com.ll.medium.domain.article.entity.ArticleForm;
 import com.ll.medium.domain.article.service.ArticleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,10 +36,10 @@ public class ArticleController {
     }
 
     @GetMapping("/post/list")
-    public String getList(Model model){
-        List<Article> articleList = new ArrayList<>();
-        articleList = this.articleService.getList();
-        model.addAttribute("articleList", articleList);
+    public String getList(Model model,
+                          @RequestParam(value="page", defaultValue="0") int page){
+        Page<Article> paging = this.articleService.getList(page);
+        model.addAttribute("paging", paging);
         return "article_list";
     }
 

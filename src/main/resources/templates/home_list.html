@@ -1,6 +1,5 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-
     <table class="table">
         <thead>
         <tr>
@@ -10,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="article, loop : ${articleList}">
+        <tr th:each="article, loop : ${paging}">
             <td th:text="${loop.count}"></td>
             <td>
                 <a th:href="@{|/post/${article.id}|}" th:text="${article.title}"></a>
@@ -19,6 +18,7 @@
         </tr>
         </tbody>
     </table>
+
 
     <a th:href="@{/post/write}" class="btn btn-primary">글쓰기</a>
 </div>

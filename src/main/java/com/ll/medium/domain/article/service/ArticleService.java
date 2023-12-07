@@ -4,10 +4,12 @@ import com.ll.medium.domain.article.entity.Article;
 import com.ll.medium.domain.article.repository.ArticleRepository;
 import com.ll.medium.global.Exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,8 +26,9 @@ public class ArticleService {
         this.articleRepository.save(article);
     }
 
-    public List<Article> getList(){
-        return this.articleRepository.findAll();
+    public Page<Article> getList(int page){
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.articleRepository.findAll(pageable);
     }
 
     public Article getArticle(Long id) {
@@ -35,5 +38,10 @@ public class ArticleService {
         } else {
             throw new DataNotFoundException("article not found");
         }
+    }
+
+    public Page<Article> getHomeList(int page) {
+        Pageable pageable = PageRequest.of(page, 30);
+        return this.articleRepository.findAll(pageable);
     }
 }
