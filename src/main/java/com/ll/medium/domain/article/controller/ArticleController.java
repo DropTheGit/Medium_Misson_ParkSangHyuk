@@ -96,4 +96,14 @@ public class ArticleController {
         this.articleService.delete(article);
         return "redirect:/post/list";
     }
+
+    @GetMapping("/post/b/{username}")
+    public String userArticle(@PathVariable("username") String username, Model model,
+                              @RequestParam(value = "page", defaultValue = "0") int page) {
+
+        Member member = this.memberService.getMember(username);
+        Page<Article> paging = this.articleService.getArticlesByAuthor(member, page);
+        model.addAttribute("paging", paging);
+        return "article_user";
+    }
 }

@@ -65,4 +65,10 @@ public class ArticleService {
         return this.articleRepository.findAll(pageable);
     }
 
+    public Page<Article> getArticlesByAuthor(Member author, int page){
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("CreateDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return this.articleRepository.findByAuthor(author, pageable);
+    }
 }
