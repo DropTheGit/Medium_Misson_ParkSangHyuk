@@ -2,6 +2,7 @@ package com.ll.medium.domain.article.service;
 
 import com.ll.medium.domain.article.entity.Article;
 import com.ll.medium.domain.article.repository.ArticleRepository;
+import com.ll.medium.domain.member.entity.Member;
 import com.ll.medium.global.Exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,13 +21,25 @@ import java.util.Optional;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
-    public void write(String title, String body, boolean isPublished){
+    public void write(String title, String body, boolean isPublished, Member member){
         Article article = new Article();
         article.setTitle(title);
         article.setBody(body);
         article.setPublished(isPublished);
         article.setCreateDate(LocalDateTime.now());
+        article.setAuthor(member);
         this.articleRepository.save(article);
+    }
+
+    public void modify(Article article, String title, String body){
+        article.setTitle(title);
+        article.setBody(body);
+        article.setModifyDate(LocalDateTime.now());
+        this.articleRepository.save(article);
+    }
+
+    public void delete(Article article){
+        this.articleRepository.delete(article);
     }
 
     public Page<Article> getList(int page){
@@ -51,4 +64,5 @@ public class ArticleService {
         Pageable pageable = PageRequest.of(page, 30, Sort.by(sorts));
         return this.articleRepository.findAll(pageable);
     }
+
 }

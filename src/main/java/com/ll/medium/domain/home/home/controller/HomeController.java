@@ -15,7 +15,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHome(Model model){
-        Page<Article> paging = this.articleService.getHomeList(1);
+        Page<Article> paging = this.articleService.getHomeList(0);
         model.addAttribute("paging", paging);
         return "domain/home/home_list";
     }

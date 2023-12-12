@@ -26,4 +26,6 @@ public class Article {
     @ManyToOne
     private Member author;
 
+    private LocalDateTime modifyDate;
+
 }

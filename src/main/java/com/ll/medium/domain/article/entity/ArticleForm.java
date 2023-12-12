@@ -18,4 +18,5 @@ public class ArticleForm {
 
     @NotNull
     private boolean isPublished;
+
 }
