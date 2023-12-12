@@ -13,10 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -71,15 +68,15 @@ public class ArticleController {
         }
         articleForm.setTitle(article.getTitle());
         articleForm.setBody(article.getBody());
-        return "article_write";
+        return "article_modify";
     }
 
-    @PostMapping("/post/{id}/modify")
+    @PutMapping("/post/{id}/modify")
     @PreAuthorize("isAuthenticated()")
     public String articleModify(@PathVariable("id") Long id, Principal principal,
                                 @Valid ArticleForm articleForm, BindingResult bindiResult){
         if(bindiResult.hasErrors()){
-            return "article_write";
+            return "article_modify";
         }
         Article article = this.articleService.getArticle(id);
         if(!article.getAuthor().getUsername().equals(principal.getName())){
