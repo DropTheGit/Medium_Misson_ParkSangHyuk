@@ -28,14 +28,14 @@ public class ArticleController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/post/write")
     public String write(ArticleForm articleForm){
-        return "article_write";
+        return "domain/article/article_write";
     }
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/post/write")
     public String write(@Valid ArticleForm articleForm, BindingResult bindingResult,
                         Principal principal){
         if(bindingResult.hasErrors()){
-            return "article_write";
+            return "domain/article/article_write";
         }
         Member member = memberService.getMember(principal.getName());
         this.articleService.write(articleForm.getTitle(), articleForm.getBody(),
@@ -48,14 +48,14 @@ public class ArticleController {
                           @RequestParam(value="page", defaultValue="0") int page){
         Page<Article> paging = this.articleService.getList(page);
         model.addAttribute("paging", paging);
-        return "article_list";
+        return "domain/article/article_list";
     }
 
     @GetMapping("post/{id}")
     public String showDetail(Model model, @PathVariable("id") Long id){
         Article article = this.articleService.getArticle(id);
         model.addAttribute("article", article);
-        return "article_detail";
+        return "domain/article/article_detail";
     }
 
     @GetMapping("/post/{id}/modify")
@@ -68,7 +68,7 @@ public class ArticleController {
         }
         articleForm.setTitle(article.getTitle());
         articleForm.setBody(article.getBody());
-        return "article_modify";
+        return "domain/article/article_modify";
     }
 
     @PutMapping("/post/{id}/modify")
@@ -76,7 +76,7 @@ public class ArticleController {
     public String articleModify(@PathVariable("id") Long id, Principal principal,
                                 @Valid ArticleForm articleForm, BindingResult bindiResult){
         if(bindiResult.hasErrors()){
-            return "article_modify";
+            return "domain/article/article_modify";
         }
         Article article = this.articleService.getArticle(id);
         if(!article.getAuthor().getUsername().equals(principal.getName())){
@@ -104,6 +104,6 @@ public class ArticleController {
         Member member = this.memberService.getMember(username);
         Page<Article> paging = this.articleService.getArticlesByAuthor(member, page);
         model.addAttribute("paging", paging);
-        return "article_user";
+        return "domain/article/article_user";
     }
 }

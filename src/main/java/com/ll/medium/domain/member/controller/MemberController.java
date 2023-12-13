@@ -16,19 +16,19 @@ public class MemberController {
     private final MemberService memberService;
     @GetMapping("/member/join")
     public String join(MemberCreateForm memberCreateForm){
-        return "join_form";
+        return "domain/member/join_form";
     }
 
     @PostMapping("/member/join")
     public String join(@Valid MemberCreateForm memberCreateForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "join_form";
+            return "domain/member/join_form";
         }
 
         if (!memberCreateForm.getPassword1().equals(memberCreateForm.getPassword2())){
             bindingResult.rejectValue("password2", "passwordInCorrect",
                     "2개의 패스워드가 일치하지 않습니다.");
-            return "join_form";
+            return "domain/member/join_form";
         }
 
         this.memberService.join(memberCreateForm.getUsername(), memberCreateForm.getPassword1());
@@ -38,6 +38,6 @@ public class MemberController {
 
     @GetMapping("/member/login")
     public String login() {
-        return "login_form";
+        return "domain/member/login_form";
     }
 }
