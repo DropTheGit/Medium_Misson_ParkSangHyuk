@@ -2,13 +2,15 @@
 <div layout:fragment="content">
     <div class="container my-4">
         <h2 class="text-center mb-3">Welcome to <span style="color:orange">Medium</span></h2>
-        <div class="text-end me-3"><a th:href="@{/post/write}" class="btn btn-primary">글쓰기</a></div>
+        <div class="text-end me-3">
+            <a th:href="@{/post/write}" class="btn btn-primary">글쓰기</a>
+        </div>
 
-        <table class="table my-3">
+        <table class="table my-1">
             <thead>
             <tr class="text-center">
                 <th>번호</th>
-                <th>제목</th>
+                <th style="width:50%">제목</th>
                 <th>글쓴이</th>
                 <th>작성일시</th>
             </tr>
@@ -17,7 +19,7 @@
             <tr th:each="article, loop : ${paging}">
                 <td class="text-center align-middle" th:text="${loop.count}"></td>
                 <td class="align-middle">
-                    <a th:href="@{|/post/${article.id}|}" th:text="${article.title}"></a>
+                    <a class="link-underline-light" th:href="@{|/post/${article.id}|}" th:text="${article.title}"></a>
                 </td>
                 <td>
                     <div th:if="${article.author != null}">
