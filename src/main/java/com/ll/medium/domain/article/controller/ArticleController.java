@@ -100,10 +100,10 @@ public class ArticleController {
     @GetMapping("/post/b/{username}")
     public String userArticle(@PathVariable("username") String username, Model model,
                               @RequestParam(value = "page", defaultValue = "0") int page) {
-
         Member member = this.memberService.getMember(username);
         Page<Article> paging = this.articleService.getArticlesByAuthor(member, page);
         model.addAttribute("paging", paging);
+        model.addAttribute("author", member);
         return "domain/article/article_user";
     }
 }

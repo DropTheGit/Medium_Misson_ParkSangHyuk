@@ -1,15 +1,19 @@
 <html layout:decorate="~{global/layout}">
 <div layout:fragment="content">
-    <table class="table">
+    <div class="container my-3">
+        <h2>
+            <span style="color:orange"  th:text="${author.username}"></span><span>님의 작성글</span>
+        </h2>
+    <table class="table my-3">
         <thead>
-        <tr class="text-center">
+        <tr class="text-center table-secondary">
             <th>번호</th>
             <th style="width:50%">제목</th>
             <th>글쓴이</th>
             <th>작성일시</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
         <tr class="text-center" th:each="article, loop : ${paging}">
             <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td class="text-start">
@@ -22,6 +26,7 @@
         </tr>
         </tbody>
     </table>
+    </div>
 
     <!-- 페이징 처리 -->
     <div th:if="${!paging.isEmpty}">
@@ -39,7 +44,6 @@
             </li>
         </ul>
     </div>
-    <a th:href="@{/post/write}" class="btn btn-primary">글쓰기</a>
 </div>
 </html>
 
