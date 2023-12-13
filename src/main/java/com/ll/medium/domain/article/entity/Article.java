@@ -28,4 +28,5 @@ public class Article {
 
     private LocalDateTime modifyDate;
 
+    private Integer hit;
 }

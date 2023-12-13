@@ -14,13 +14,14 @@
             <th style="width:50%">제목</th>
             <th>글쓴이</th>
             <th>작성일시</th>
+            <th>조회수</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
         <tr class="text-center" th:each="article, loop : ${paging}">
             <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td class="text-start">
-                <a class="link-underline-light" th:href="@{|/post/${article.id}|}" th:text="${article.title}"></a>
+                <a class="link-underline-light" th:href="@{|/post/${article.id}/increaseHit|}" th:text="${article.title}"></a>
             </td>
             <td>
                 <div th:if="${article.author != null}">
@@ -36,6 +37,10 @@
                 </div>
             </td>
             <td th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td>
+                <span th:if="${article.hit == null}">0</span>
+                <span th:if="${article.hit != null}">[[${article.hit}]]</span>
+            </td>
         </tr>
         </tbody>
     </table>

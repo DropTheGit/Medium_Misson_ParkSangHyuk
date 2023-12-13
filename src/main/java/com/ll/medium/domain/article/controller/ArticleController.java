@@ -107,7 +107,7 @@ public class ArticleController {
         return "domain/article/articles_by_user";
     }
 
-    @GetMapping("post/b/{username}/{id}")
+    @GetMapping("/post/b/{username}/{id}")
     public String showUserArticleDetail(Model model, @PathVariable("username") String username, @PathVariable("id") Long id){
         Member member = this.memberService.getMember(username);
         Article article = this.articleService.getArticle(id);
@@ -115,5 +115,10 @@ public class ArticleController {
         model.addAttribute("article", article);
         return "domain/article/article_detail_by_user";
     }
-
+    @GetMapping("/post/{id}/increaseHit")
+    public String increaseHit(@PathVariable("id") Long id){
+        Article article = this.articleService.getArticle(id);
+        this.articleService.increaseHit(article);
+        return String.format("redirect:/post/%d", id);
+    }
 }

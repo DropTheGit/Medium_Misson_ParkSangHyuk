@@ -71,4 +71,14 @@ public class ArticleService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.articleRepository.findByAuthor(author, pageable);
     }
+
+    public void increaseHit(Article article){
+        if(article.getHit()==null){
+            article.setHit(1);
+            this.articleRepository.save(article);
+            return;
+        }
+        article.setHit(article.getHit()+1);
+        this.articleRepository.save(article);
+    }
 }
