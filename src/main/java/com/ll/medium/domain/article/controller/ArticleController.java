@@ -113,6 +113,8 @@ public class ArticleController {
         Article article = this.articleService.getArticle(id);
         model.addAttribute("username", member.getUsername());
         model.addAttribute("article", article);
+        // home_list, article_list와 URL이 달라 increaseHit 메서드를 사용하기 어려워 자체적으로 구현함
+        this.articleService.increaseHit(article);
         return "domain/article/article_detail_by_user";
     }
     @GetMapping("/post/{id}/increaseHit")
