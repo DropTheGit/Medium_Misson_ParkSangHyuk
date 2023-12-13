@@ -103,7 +103,17 @@ public class ArticleController {
         Member member = this.memberService.getMember(username);
         Page<Article> paging = this.articleService.getArticlesByAuthor(member, page);
         model.addAttribute("paging", paging);
-        model.addAttribute("author", member);
-        return "domain/article/article_user";
+        model.addAttribute("username", member.getUsername());
+        return "domain/article/articles_by_user";
     }
+
+    @GetMapping("post/b/{username}/{id}")
+    public String showUserArticleDetail(Model model, @PathVariable("username") String username, @PathVariable("id") Long id){
+        Member member = this.memberService.getMember(username);
+        Article article = this.articleService.getArticle(id);
+        model.addAttribute("username", member.getUsername());
+        model.addAttribute("article", article);
+        return "domain/article/article_detail_by_user";
+    }
+
 }

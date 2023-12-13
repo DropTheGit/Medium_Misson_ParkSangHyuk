@@ -2,7 +2,7 @@
 <div layout:fragment="content">
     <div class="container my-3">
         <h2>
-            <span style="color:orange"  th:text="${author.username}"></span><span>님의 작성글</span>
+            <span style="color:orange"  th:text="${username}"></span><span>님의 작성글</span>
         </h2>
     <table class="table my-3">
         <thead>
@@ -17,7 +17,7 @@
         <tr class="text-center" th:each="article, loop : ${paging}">
             <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td class="text-start">
-                <a th:href="@{|/post/${article.id}|}" th:text="${article.title}"></a>
+                <a th:href="@{|/post/b/${article.author.username}/${article.id}|}" th:text="${article.title}"></a>
             </td>
             <td>
                 <span th:if="${article.author != null}" th:text="${article.author.username}"></span>
