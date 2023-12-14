@@ -1,6 +1,6 @@
-package com.ll.medium.domain.article.repository;
+package com.ll.medium.domain.article.article.repository;
 
-import com.ll.medium.domain.article.entity.Article;
+import com.ll.medium.domain.article.article.entity.Article;
 import com.ll.medium.domain.member.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

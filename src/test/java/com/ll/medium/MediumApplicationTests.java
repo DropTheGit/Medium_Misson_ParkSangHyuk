@@ -1,7 +1,7 @@
 package com.ll.medium;
 
-import com.ll.medium.domain.article.entity.Article;
-import com.ll.medium.domain.article.repository.ArticleRepository;
+import com.ll.medium.domain.article.article.entity.Article;
+import com.ll.medium.domain.article.article.repository.ArticleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

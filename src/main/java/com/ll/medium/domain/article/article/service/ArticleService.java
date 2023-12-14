@@ -1,7 +1,7 @@
-package com.ll.medium.domain.article.service;
+package com.ll.medium.domain.article.article.service;
 
-import com.ll.medium.domain.article.entity.Article;
-import com.ll.medium.domain.article.repository.ArticleRepository;
+import com.ll.medium.domain.article.article.entity.Article;
+import com.ll.medium.domain.article.article.repository.ArticleRepository;
 import com.ll.medium.domain.member.entity.Member;
 import com.ll.medium.global.Exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;

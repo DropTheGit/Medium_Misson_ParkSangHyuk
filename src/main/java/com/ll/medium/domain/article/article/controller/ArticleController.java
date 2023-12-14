@@ -1,8 +1,8 @@
-package com.ll.medium.domain.article.controller;
+package com.ll.medium.domain.article.article.controller;
 
-import com.ll.medium.domain.article.entity.Article;
-import com.ll.medium.domain.article.entity.ArticleForm;
-import com.ll.medium.domain.article.service.ArticleService;
+import com.ll.medium.domain.article.article.entity.Article;
+import com.ll.medium.domain.article.article.entity.ArticleForm;
+import com.ll.medium.domain.article.article.service.ArticleService;
 import com.ll.medium.domain.member.entity.Member;
 import com.ll.medium.domain.member.service.MemberService;
 import jakarta.validation.Valid;
