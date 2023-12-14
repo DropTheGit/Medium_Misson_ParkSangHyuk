@@ -34,8 +34,16 @@
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2 text-start">
                     <div th:if="${comment.modifyDate != null}" th:text="|modified ${#temporals.format(comment.modifyDate, 'yyyy-MM-dd HH:mm')}|"></div>
-                    <div th:text="|created ${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}|"></div>
                 </div>
+                <div class="badge bg-light text-dark p-2 text-start">
+                <div th:text="|created ${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}|"></div>
+                </div>
+            </div>
+            <div class="my-3">
+                <a th:href="@{|/post/${article.id}/comment/${comment.id}/modify|}" class="btn btn-sm btn-outline-secondary"
+                   sec:authorize="isAuthenticated()"
+                   th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
+                   th:text="수정"></a>
             </div>
         </div>
     </div>
