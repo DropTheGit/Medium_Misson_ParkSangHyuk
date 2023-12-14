@@ -29,19 +29,19 @@
     </div>
     <div class="my-3 text-center" th:if="!${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
         <form th:action="@{|/post/${article.id}/like|}" th:method="post">
-            <button type="submit" class="btn btn-sm btn-outline-secondary"
+            <button type="submit" class="btn btn-outline-primary"
                     sec:authorize="isAuthenticated()"
                     >좋아요</button>
         </form>
     </div>
     <div class="my-3 text-center" th:if="${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
         <form th:action="@{|/post/${article.id}/cancellike|}" th:method="delete">
-            <button type="submit" class="btn btn-sm btn-outline-secondary"
+            <button type="submit" class="btn btn-primary"
                     sec:authorize="isAuthenticated()">좋아요 취소</button>
         </form>
     </div>
     <div class="text-center">
-        <span th:text="|좋아요 : ${article.recommendList.size()}|"></span>
+        <span th:text="|추천수 : ${article.recommendList.size()}|"></span>
     </div>
 
 
