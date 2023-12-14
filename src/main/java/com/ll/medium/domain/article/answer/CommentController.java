@@ -34,6 +34,6 @@ public class CommentController {
             return "domain/article/article_detail";
         }
         this.commentService.createAnswer(commentForm.getContent(), article, member);
-        return String.format("redirect:/post/$d", id);
+        return String.format("redirect:/post/%d", id);
     }
 }

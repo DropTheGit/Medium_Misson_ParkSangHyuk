@@ -20,6 +20,8 @@ public class Comment {
 
     private LocalDateTime createDate;
 
+    private LocalDateTime modifyDate;
+
     @ManyToOne
     private Article article;
 
