@@ -11,7 +11,8 @@
             <th style="width:50%">제목</th>
             <th>글쓴이</th>
             <th>작성일시</th>
-            <th>작성일시</th>
+            <th>조회수</th>
+            <th>추천수</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -28,6 +29,9 @@
             <td class="text-center align-middle">
                 <span th:if="${article.hit == null}">0</span>
                 <span th:if="${article.hit != null}">[[${article.hit}]]</span>
+            </td>
+            <td class="text-center align-middle">
+                <span th:text="${article.recommendList.size()}"></span>
             </td>
         </tr>
         </tbody>
