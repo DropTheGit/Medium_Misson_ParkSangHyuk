@@ -67,4 +67,17 @@ public class CommentController {
         this.commentService.modifyComment(comment, commentForm.getContent());
         return String.format("redirect:/post/%d", articleId);
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("post/{articleId}/comment/{commentId}/delete")
+    public String deleteComment(@PathVariable("articleId") Long articleId, @PathVariable("commentId") Long commnetId,
+                                Principal principal){
+        Comment comment = this.commentService.getComment(commnetId);
+        if(!comment.getAuthor().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없어요.");
+        }
+        this.commentService.deleteComment(comment);
+        return String.format("redirect:/post/%d", articleId);
+    }
+
 }
