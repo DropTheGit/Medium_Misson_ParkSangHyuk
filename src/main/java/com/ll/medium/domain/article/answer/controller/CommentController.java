@@ -1,5 +1,8 @@
-package com.ll.medium.domain.article.answer;
+package com.ll.medium.domain.article.answer.controller;
 
+import com.ll.medium.domain.article.answer.entity.CommentForm;
+import com.ll.medium.domain.article.answer.service.CommentService;
+import com.ll.medium.domain.article.answer.entity.Comment;
 import com.ll.medium.domain.article.article.entity.Article;
 import com.ll.medium.domain.article.article.service.ArticleService;
 import com.ll.medium.domain.member.entity.Member;

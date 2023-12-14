@@ -1,6 +1,8 @@
-package com.ll.medium.domain.article.recommend;
+package com.ll.medium.domain.article.recommend.service;
 
 import com.ll.medium.domain.article.article.entity.Article;
+import com.ll.medium.domain.article.recommend.entity.Recommend;
+import com.ll.medium.domain.article.recommend.repository.RecommendRepository;
 import com.ll.medium.domain.member.entity.Member;
 import com.ll.medium.global.Exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;

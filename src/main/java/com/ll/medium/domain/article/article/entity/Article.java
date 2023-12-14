@@ -1,7 +1,7 @@
 package com.ll.medium.domain.article.article.entity;
 
-import com.ll.medium.domain.article.answer.Comment;
-import com.ll.medium.domain.article.recommend.Recommend;
+import com.ll.medium.domain.article.answer.entity.Comment;
+import com.ll.medium.domain.article.recommend.entity.Recommend;
 import com.ll.medium.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;

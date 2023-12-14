@@ -1,6 +1,7 @@
-package com.ll.medium.domain.article.recommend;
+package com.ll.medium.domain.article.recommend.repository;
 
 import com.ll.medium.domain.article.article.entity.Article;
+import com.ll.medium.domain.article.recommend.entity.Recommend;
 import com.ll.medium.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 

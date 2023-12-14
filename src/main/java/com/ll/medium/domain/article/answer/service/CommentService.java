@@ -1,5 +1,7 @@
-package com.ll.medium.domain.article.answer;
+package com.ll.medium.domain.article.answer.service;
 
+import com.ll.medium.domain.article.answer.entity.Comment;
+import com.ll.medium.domain.article.answer.repository.CommentRepository;
 import com.ll.medium.domain.article.article.entity.Article;
 import com.ll.medium.domain.member.entity.Member;
 import com.ll.medium.global.Exception.DataNotFoundException;

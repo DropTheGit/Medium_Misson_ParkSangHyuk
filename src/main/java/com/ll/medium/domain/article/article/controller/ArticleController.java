@@ -20,18 +20,20 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/post")
 public class ArticleController {
 
     private final ArticleService articleService;
     private final MemberService memberService;
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/post/write")
+    @GetMapping("/write")
     public String write(ArticleForm articleForm){
         return "domain/article/article_write";
     }
+
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/post/write")
+    @PostMapping("/write")
     public String write(@Valid ArticleForm articleForm, BindingResult bindingResult,
                         Principal principal){
         if(bindingResult.hasErrors()){
@@ -43,7 +45,7 @@ public class ArticleController {
         return "redirect:/post/list";
     }
 
-    @GetMapping("/post/list")
+    @GetMapping("/list")
     public String getList(Model model,
                           @RequestParam(value="page", defaultValue="0") int page){
         Page<Article> paging = this.articleService.getList(page);
@@ -51,14 +53,14 @@ public class ArticleController {
         return "domain/article/article_list";
     }
 
-    @RequestMapping(value = {"/post/{id}", "/post/b/{username}/{id}"})
+    @RequestMapping(value = {"/{id}", "/b/{username}/{id}"})
     public String showDetail(Model model, @PathVariable("id") Long id){
         Article article = this.articleService.getArticle(id);
         model.addAttribute("article", article);
         return "domain/article/article_detail";
     }
 
-    @GetMapping("/post/{id}/modify")
+    @GetMapping("/{id}/modify")
     @PreAuthorize("isAuthenticated()")
     public String articleModify(ArticleForm articleForm,
                          @PathVariable("id") Long id, Principal principal){
@@ -71,7 +73,7 @@ public class ArticleController {
         return "domain/article/article_modify";
     }
 
-    @PutMapping("/post/{id}/modify")
+    @PutMapping("/{id}/modify")
     @PreAuthorize("isAuthenticated()")
     public String articleModify(@PathVariable("id") Long id, Principal principal,
                                 @Valid ArticleForm articleForm, BindingResult bindiResult){
@@ -87,7 +89,7 @@ public class ArticleController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @DeleteMapping("/post/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public String articleDelete(Principal principal, @PathVariable("id") Long id){
         Article article = this.articleService.getArticle(id);
         if(!article.getAuthor().getUsername().equals(principal.getName())){
@@ -97,7 +99,7 @@ public class ArticleController {
         return "redirect:/post/list";
     }
 
-    @GetMapping("/post/b/{username}")
+    @GetMapping("/b/{username}")
     public String userArticle(@PathVariable("username") String username, Model model,
                               @RequestParam(value = "page", defaultValue = "0") int page) {
         Member member = this.memberService.getMember(username);
@@ -107,7 +109,7 @@ public class ArticleController {
         return "domain/article/articles_by_user";
     }
 
-    @PostMapping("/post/{id}/increaseHit")
+    @PostMapping("/{id}/increaseHit")
     public String increaseHit(@PathVariable("id") Long id){
         Article article = this.articleService.getArticle(id);
         this.articleService.increaseHit(article);

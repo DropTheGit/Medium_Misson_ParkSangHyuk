@@ -1,7 +1,9 @@
-package com.ll.medium.domain.article.recommend;
+package com.ll.medium.domain.article.recommend.controller;
 
 import com.ll.medium.domain.article.article.entity.Article;
 import com.ll.medium.domain.article.article.service.ArticleService;
+import com.ll.medium.domain.article.recommend.service.RecommendService;
+import com.ll.medium.domain.article.recommend.entity.Recommend;
 import com.ll.medium.domain.member.entity.Member;
 import com.ll.medium.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
