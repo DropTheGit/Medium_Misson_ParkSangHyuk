@@ -51,7 +51,7 @@ public class ArticleController {
         return "domain/article/article_list";
     }
 
-    @GetMapping("post/{id}")
+    @RequestMapping(value = {"/post/{id}", "/post/b/{username}/{id}"})
     public String showDetail(Model model, @PathVariable("id") Long id){
         Article article = this.articleService.getArticle(id);
         model.addAttribute("article", article);
@@ -107,17 +107,7 @@ public class ArticleController {
         return "domain/article/articles_by_user";
     }
 
-    @GetMapping("/post/b/{username}/{id}")
-    public String showUserArticleDetail(Model model, @PathVariable("username") String username, @PathVariable("id") Long id){
-        Member member = this.memberService.getMember(username);
-        Article article = this.articleService.getArticle(id);
-        model.addAttribute("username", member.getUsername());
-        model.addAttribute("article", article);
-        // home_list, article_list와 URL이 달라 increaseHit 메서드를 사용하기 어려워 자체적으로 구현함
-        this.articleService.increaseHit(article);
-        return "domain/article/article_detail_by_user";
-    }
-    @GetMapping("/post/{id}/increaseHit")
+    @PostMapping("/post/{id}/increaseHit")
     public String increaseHit(@PathVariable("id") Long id){
         Article article = this.articleService.getArticle(id);
         this.articleService.increaseHit(article);
