@@ -1,6 +1,7 @@
 package com.ll.medium.domain.article.article.entity;
 
 import com.ll.medium.domain.article.answer.Comment;
+import com.ll.medium.domain.article.recommend.Recommend;
 import com.ll.medium.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -34,4 +35,7 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+    private List<Recommend> recommendList;
 }

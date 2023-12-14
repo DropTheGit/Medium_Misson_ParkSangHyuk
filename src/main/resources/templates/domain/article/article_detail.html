@@ -27,6 +27,23 @@
                     th:text="삭제"></button>
         </form>
     </div>
+    <div class="my-3 text-center" th:if="!${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
+        <form th:action="@{|/post/${article.id}/like|}" th:method="post">
+            <button type="submit" class="btn btn-sm btn-outline-secondary"
+                    sec:authorize="isAuthenticated()"
+                    >좋아요</button>
+        </form>
+    </div>
+    <div class="my-3 text-center" th:if="${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
+        <form th:action="@{|/post/${article.id}/cancellike|}" th:method="delete">
+            <button type="submit" class="btn btn-sm btn-outline-secondary"
+                    sec:authorize="isAuthenticated()">좋아요 취소</button>
+        </form>
+    </div>
+    <div class="text-center">
+        <span th:text="|좋아요 : ${article.recommendList.size()}|"></span>
+    </div>
+
 
     <!-- 답변 -->
     <h5 th:text="|${#lists.size(article.commentList)}개의 답변이 있습니다.|"></h5>
@@ -49,7 +66,8 @@
                    sec:authorize="isAuthenticated()"
                    th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
                    th:text="수정"></a>
-                <form th:action="@{|/post/${article.id}/comment/${comment.id}/delete|}" th:method="delete" class="d-inline">
+                <form th:action="@{|/post/${article.id}/comment/${comment.id}/delete|}" th:method="delete"
+                      class="d-inline">
                     <button type="submit" class="delete btn btn-sm btn-outline-secondary"
                             sec:authorize="isAuthenticated()"
                             th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
