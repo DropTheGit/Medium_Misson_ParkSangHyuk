@@ -18,8 +18,9 @@
         <tr class="text-center" th:each="article, loop : ${paging}">
             <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td class="text-start">
-                <a th:href="@{|/post/b/${article.author.username}/${article.id}|}" th:text="${article.title}"></a>
-            </td>
+                <form th:action="@{|/post/${article.id}/increaseHit|}" th:method="post" class="d-inline">
+                    <button class="btn btn-link link-underline-light" th:text="${article.title}"></button>
+                </form>            </td>
             <td>
                 <span th:if="${article.author != null}" th:text="${article.author.username}"></span>
             </td>
