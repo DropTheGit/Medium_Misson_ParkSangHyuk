@@ -87,7 +87,7 @@ public class ArticleController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/post/{id}/delete")
+    @DeleteMapping("/post/{id}/delete")
     public String articleDelete(Principal principal, @PathVariable("id") Long id){
         Article article = this.articleService.getArticle(id);
         if(!article.getAuthor().getUsername().equals(principal.getName())){
