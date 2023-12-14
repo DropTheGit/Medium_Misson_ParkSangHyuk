@@ -1,6 +1,6 @@
 package com.ll.medium.domain.article.article.entity;
 
-import com.ll.medium.domain.article.answer.Answer;
+import com.ll.medium.domain.article.answer.Comment;
 import com.ll.medium.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -33,5 +33,5 @@ public class Article {
     private Integer hit;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
-    private List<Answer> answerList;
+    private List<Comment> commentList;
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Answer {
+public class Comment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
