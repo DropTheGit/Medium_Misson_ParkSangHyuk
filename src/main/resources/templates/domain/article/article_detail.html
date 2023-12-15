@@ -1,5 +1,6 @@
 <html layout:decorate="~{global/layout}">
 <div layout:fragment="content" class="container my-3">
+
     <h2 class="border-bottom py-2" th:text="${article.title}"></h2>
     <div class="card my-3">
         <div class="card-body">
@@ -40,7 +41,7 @@
                     sec:authorize="isAuthenticated()">좋아요 취소</button>
         </form>
     </div>
-    <div class="text-center">
+    <div class="text-center mb-3">
         <span th:text="|추천수 : ${article.recommendList.size()}|"></span>
     </div>
 
