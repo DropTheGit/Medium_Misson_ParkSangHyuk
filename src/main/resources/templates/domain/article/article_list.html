@@ -1,0 +1,78 @@
+<html layout:decorate="~{global/layout}">
+<div layout:fragment="content">
+    <div class="container my-3">
+        <h1 class="ms-3">글 목록</h1>
+    </div>
+    <div class="container text-end">
+        <a th:href="@{/post/write}" class="btn btn-primary">글쓰기</a>
+    </div>
+    <div class="container my-1">
+        <table class="table">
+            <thead>
+            <tr class="text-center table-secondary">
+                <th>번호</th>
+                <th style="width:50%">제목</th>
+                <th>글쓴이</th>
+                <th>작성일시</th>
+                <th>조회수</th>
+                <th>추천수</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr class="text-center" th:each="article, loop : ${paging}">
+                <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+                <td class="text-start">
+                    <form th:action="@{|/post/${article.id}/increaseHit|}" th:method="post" class="d-inline">
+                        <button class="btn btn-link link-underline-light" th:text="${article.title}"></button>
+                    </form>
+                </td>
+                <td>
+                    <div th:if="${article.author != null}">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    th:text="${article.author.username}">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{|/post/b/${article.author.username}|}">작성글
+                                    보기</a></li>
+                                <li><a class="dropdown-item" href="#">작성자 정보</a></li>
+                                <li><a class="dropdown-item" href="#">쪽지 보내기</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td>
+                    <span th:if="${article.hit == null}">0</span>
+                    <span th:if="${article.hit != null}">[[${article.hit}]]</span>
+                </td>
+                <td>
+                    <span th:text="${article.recommendList.size()}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 페이징 처리 -->
+    <div th:if="${!paging.isEmpty}">
+        <ul class="pagination pagination-sm justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:if="${paging.hasPrevious}" th:href="@{|?page=${paging.number-1}|}">이전</a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:classappend="${paging.number == page} ? 'active'"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}">
+                <a class="page-link" th:text="${page+1}" th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:if="${paging.hasNext}" th:href="@{|?page=${paging.number+1}|}">다음</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</html>
+
+

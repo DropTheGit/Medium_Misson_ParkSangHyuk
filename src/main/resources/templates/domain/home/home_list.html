@@ -1,0 +1,61 @@
+<html layout:decorate="~{global/layout}">
+<div layout:fragment="content">
+    <div class="container my-4">
+        <h2 class="text-center mb-3">Welcome to <span style="color:orange">Medium</span></h2>
+        <div class="text-end me-3">
+            <a th:href="@{/post/write}" class="btn btn-primary">글쓰기</a>
+        </div>
+        <table class="table my-1">
+            <thead>
+            <tr class="text-center">
+                <th>번호</th>
+                <th style="width:50%">제목</th>
+                <th>글쓴이</th>
+                <th>작성일시</th>
+                <th>조회수</th>
+                <th>추천수</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr th:each="article, loop : ${paging}">
+                <td class="text-center align-middle" th:text="${loop.count}"></td>
+                <td class="align-middle">
+                    <form th:action="@{|/post/${article.id}/increaseHit|}" th:method="post" class="d-inline">
+                        <button class="btn btn-link link-underline-light" th:text="${article.title}"></button>
+                    </form>
+                </td>
+                <td>
+                    <div th:if="${article.author != null}">
+                        <div class="dropdown text-center align-middle">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    th:text="${article.author.username}">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{|/post/b/${article.author.username}|}">작성글
+                                    보기</a></li>
+                                <li><a class="dropdown-item" href="#">작성자 정보</a></li>
+                                <li><a class="dropdown-item" href="#">쪽지 보내기</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center align-middle"
+                    th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td class="text-center align-middle">
+                    <span th:if="${article.hit == null}">0</span>
+                    <span th:if="${article.hit != null}">[[${article.hit}]]</span>
+                </td>
+                <td class="text-center align-middle">
+                    <span th:text="${article.recommendList.size()}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+</html>
+
+
