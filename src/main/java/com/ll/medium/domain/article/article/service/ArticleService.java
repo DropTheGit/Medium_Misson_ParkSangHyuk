@@ -26,7 +26,7 @@ public class ArticleService {
         article.setTitle(title);
         article.setBody(body);
         article.setPublished(isPublished);
-        article.setPublished(isPaid);
+        article.setPaid(isPaid);
         article.setCreateDate(LocalDateTime.now());
         article.setAuthor(member);
         this.articleRepository.save(article);
