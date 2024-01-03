@@ -35,6 +35,10 @@ public class UserSecurityService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
         }
 
+        if(member.isPaid()){
+            authorities.add(new SimpleGrantedAuthority(UserRole.PAID.getValue()));
+        }
+
         return new User(member.getUsername(), member.getPassword(), authorities);
     }
 }
