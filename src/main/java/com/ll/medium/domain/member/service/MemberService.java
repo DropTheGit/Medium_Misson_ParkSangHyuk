@@ -23,6 +23,15 @@ public class MemberService {
         return member;
     }
 
+    public Member join(String username, String password, boolean isPaid){
+        Member member = new Member();
+        member.setUsername(username);
+        member.setPassword(passwordEncoder.encode(password));
+        member.setPaid(isPaid);
+        this.memberRepository.save(member);
+        return member;
+    }
+
 
     public Member getMember(String username) {
         Optional<Member> member = this.memberRepository.findByUsername(username);

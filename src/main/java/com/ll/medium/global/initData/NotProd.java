@@ -26,9 +26,9 @@ public class NotProd {
             public void run(ApplicationArguments args) throws Exception {
                 if (memberService.findByUsername("user1").isPresent()) return;
 
-                Member memberUser1 = memberService.join("user1", "1234");
+                Member memberUser1 = memberService.join("user1", "1234", true);
 
-                Member memberUser2 = memberService.join("user2", "1234");
+                Member memberUser2 = memberService.join("user2", "1234", true);
 
                 Member memberUser3 = memberService.join("user3", "1234");
 
