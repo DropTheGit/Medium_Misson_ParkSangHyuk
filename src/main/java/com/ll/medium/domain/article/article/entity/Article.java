@@ -26,6 +26,8 @@ public class Article {
 
     private boolean isPublished;
 
+    private boolean isPaid;
+
     @ManyToOne
     private Member author;
 

@@ -41,7 +41,7 @@ public class ArticleController {
         }
         Member member = memberService.getMember(principal.getName());
         this.articleService.write(articleForm.getTitle(), articleForm.getBody(),
-                articleForm.isPublished(), member);
+                articleForm.isPublished(), articleForm.isPaid(),member);
         return "redirect:/post/list";
     }
 
