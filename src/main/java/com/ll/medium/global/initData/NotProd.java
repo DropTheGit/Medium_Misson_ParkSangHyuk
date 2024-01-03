@@ -33,6 +33,14 @@ public class NotProd {
                 Member memberUser3 = memberService.join("user3", "1234");
 
                 Member memberUser4 = memberService.join("user4", "1234");
+
+                articleService.write("제목 1", "내용 1", true, true, memberUser1);
+                articleService.write("제목 2", "내용 2", true, true, memberUser1);
+                articleService.write("제목 3", "내용 3", true, true, memberUser1);
+                articleService.write("제목 4", "내용 4", true, false, memberUser1);
+                articleService.write("제목 5", "내용 5", true, false, memberUser1);
+
+
             }
         };
     }
