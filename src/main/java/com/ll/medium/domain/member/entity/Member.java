@@ -17,4 +17,5 @@ public class Member {
 
     private String password;
 
+    private boolean isPaid;
 }

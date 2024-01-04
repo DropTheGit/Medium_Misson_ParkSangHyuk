@@ -4,7 +4,16 @@
     <h2 class="border-bottom py-2" th:text="${article.title}"></h2>
     <div class="card my-3">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;" th:text="${article.body}"></div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_PAID'')')}"
+                 class="card-text" style="white-space: pre-line;" th:text="${article.body}"></div>
+            <div th:unless="${#authorization.expression('hasRole(''ROLE_PAID'')')}"
+                 class="card-text" style="white-space: pre-line;">
+                <div th:if="${article.isPaid()==true}"
+                     class="card-text" style="white-space: pre-line;">이 글은 유료멤버십전용 입니다.
+                </div>
+                <div th:if="${article.isPaid()==false}"
+                     class="card-text" style="white-space: pre-line;" th:text="${article.body}"></div>
+            </div>
             <div class="d-flex justify-content-end">
                 <div th:if="${article.modifyDate != null}" class="badge bg-light text-dark p-2 text-start">
                     <div th:text="|modified ${#temporals.format(article.modifyDate, 'yyyy-MM-dd HH:mm')}|"></div>
@@ -28,17 +37,21 @@
                     th:text="삭제"></button>
         </form>
     </div>
-    <div class="my-3 text-center" th:if="!${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
+    <div class="my-3 text-center"
+         th:if="!${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
         <form th:action="@{|/post/${article.id}/like|}" th:method="post">
             <button type="submit" class="btn btn-outline-primary"
                     sec:authorize="isAuthenticated()"
-                    >좋아요</button>
+            >좋아요
+            </button>
         </form>
     </div>
-    <div class="my-3 text-center" th:if="${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
+    <div class="my-3 text-center"
+         th:if="${article.recommendList.?[member.username == #authentication.getPrincipal().getUsername()].size() > 0}">
         <form th:action="@{|/post/${article.id}/cancellike|}" th:method="delete">
             <button type="submit" class="btn btn-primary"
-                    sec:authorize="isAuthenticated()">좋아요 취소</button>
+                    sec:authorize="isAuthenticated()">좋아요 취소
+            </button>
         </form>
     </div>
     <div class="text-center mb-3">

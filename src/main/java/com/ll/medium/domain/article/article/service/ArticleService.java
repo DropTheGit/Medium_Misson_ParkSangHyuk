@@ -21,11 +21,12 @@ import java.util.Optional;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
-    public void write(String title, String body, boolean isPublished, Member member){
+    public void write(String title, String body, boolean isPublished, boolean isPaid, Member member){
         Article article = new Article();
         article.setTitle(title);
         article.setBody(body);
         article.setPublished(isPublished);
+        article.setPaid(isPaid);
         article.setCreateDate(LocalDateTime.now());
         article.setAuthor(member);
         this.articleRepository.save(article);

@@ -19,4 +19,8 @@ public class ArticleForm {
     @NotNull
     private boolean isPublished;
 
+    @NotNull
+    private boolean isPaid;
+
+
 }
